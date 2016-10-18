@@ -18,24 +18,6 @@ library(XML)
 require(jpeg)
 require(png)
 
-
-
-#------------------------------#
-# Função lista categorias usq  #
-#------------------------------#
-
-listas= rbind("luciraldo","caim","deus-metal","fruto-proibido","mandamentos","relacionamento","bebado",
-              "pegadinha","aparicoes","nonsense","deuses","papa","darwin","freud","nietzsche","eisntein","murano","niemeyer",
-              "noe","raul-seixas","batatistas","oxala","","","")
-
-
-lista=function(i=1){
-  if(i=="todas")
-  {listas}
-  else{listas[i]}
-  }
-
-
 #-------------#
 # Função usq  #
 #-------------#
