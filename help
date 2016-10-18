@@ -8,7 +8,7 @@ usq(tir=1,type="current",nav=FALSE)
 
 #argumentos:
 tir -> número da tirinha entre 1 e 11. A primeira tirinha da categoria escolhida é selecionada
-type -> categoria da tirinha. current é o default. Para mais opções veja em 'detalhes' ou digite lista() para ver as opções.
+type -> categoria da tirinha. current é o default. Para mais opções veja em 'detalhes' ou digite lista('todas') para ver as opções.
 
 #exemplo:
 usq(tir=2, type="darwin")
