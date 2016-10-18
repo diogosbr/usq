@@ -1,0 +1,97 @@
+# verifica se tem os pacotes exigidos e os instala, caso ainda não esteja instalado. 
+
+if('RCurl'%in% installed.packages()==FALSE)
+{install.packages('RCurl',quiet=T)}
+
+if('XML'%in% installed.packages()==FALSE)
+{install.packages('XML',quiet=T)}
+
+if('jpeg'%in% installed.packages()==FALSE)
+{install.packages('jpeg',quiet=T)}
+
+if('png'%in% installed.packages()==FALSE)
+{install.packages('png',quiet=T)}
+
+
+library(RCurl)
+library(XML)
+require(jpeg)
+require(png)
+
+
+
+#------------------------------#
+# Função lista categorias usq  #
+#------------------------------#
+
+listas= rbind("luciraldo","caim","deus-metal","fruto-proibido","mandamentos","relacionamento","bebado",
+              "pegadinha","aparicoes","nonsense","deuses","papa","darwin","freud","nietzsche","eisntein","murano","niemeyer",
+              "noe","raul-seixas","batatistas","oxala","","","")
+
+lista=function(){listas}
+
+#-------------#
+# Função usq  #
+#-------------#
+
+usq= function(tir=1,type="current",nav=FALSE)
+{
+  url <- "http://www.umsabadoqualquer.com"
+  categorias= c("darwin","raul-seixas")
+  
+  if(type=="current"){doc <- htmlParse(url, useInternalNodes=T)
+  names   <- doc["//img/@src"]
+  tirinhas=unlist(names)[c(1,7:14)]}
+  if(type!="current"){url.comp=paste(url,"/category/",type,sep="")
+  doc <- htmlParse(url.comp, useInternalNodes=T)
+  names   <- doc["//img/@src"]
+  tirinhas=unlist(names)[c(1:11)]}
+  
+  z=tir
+  download.file(tirinhas[z], quiet = TRUE, 
+                  mode = "wb", destfile = paste(tempdir(), basename(tirinhas[z]), 
+                                                sep = "/"))
+    #lendo a imagem
+    if (grepl(".png", tirinhas[z])){
+      xkcd.img <- readPNG(paste(tempdir(), basename(tirinhas[z]), 
+                                sep = "/"))
+    }
+    
+    if (grepl(".jpg", tirinhas[z])){
+      xkcd.img <- readJPEG(paste(tempdir(), basename(tirinhas[z]), 
+                                 sep = "/"))
+    }
+    
+    img_dim <- dim(xkcd.img)
+    plot(0:max(img_dim), type = "n", axes = FALSE, xaxt = "n", 
+         yaxt = "n", xlab = "", ylab = "")
+    usr <- par("usr")
+    pin <- par("pin")
+    pin_ratio <- pin[2]/pin[1]
+    img_ratio <- img_dim[1]/img_dim[2]
+    
+    if (img_ratio > pin_ratio){
+      ytop <- usr[4]
+      xright <- usr[1] + pin[2]/img_ratio/pin[1] * 
+        (usr[2] - usr[1])
+    }
+    else {
+      ytop <- usr[3] + pin[1] * img_ratio/pin[2] * 
+        (usr[4] - usr[3])
+      xright <- usr[2]
+    }
+    
+    rasterImage(xkcd.img, xleft = usr[1], ybottom = usr[3], 
+                xright = xright, ytop = ytop)
+    
+
+  
+  if(nav==TRUE)
+  {
+    browseURL(tirinhas[z])
+  }
+}
+
+#---------------#
+# Fim da função #
+#---------------#
