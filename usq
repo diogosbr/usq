@@ -28,7 +28,13 @@ listas= rbind("luciraldo","caim","deus-metal","fruto-proibido","mandamentos","re
               "pegadinha","aparicoes","nonsense","deuses","papa","darwin","freud","nietzsche","eisntein","murano","niemeyer",
               "noe","raul-seixas","batatistas","oxala","","","")
 
-lista=function(){listas}
+
+lista=function(i=1){
+  if(i=="todas")
+  {listas}
+  else{listas[i]}
+  }
+
 
 #-------------#
 # Função usq  #
