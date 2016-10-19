@@ -3,16 +3,16 @@
 #------------------------------#
 
           
-listas= data.frame(numero=1:40,temas=rbind("luciraldo","caim","deus-metal","fruto-proibido","mandamentos","relacionamento","bebado",
+listas=rbind("luciraldo","caim","deus-metal","fruto-proibido","mandamentos","relacionamento","bebado",
               "pegadinha","aparicoes","nonsense","deuses","papa","darwin","freud","nietzsche","eisntein","murano","niemeyer",
               "noe","raul-seixas","batatistas","oxala","superfluosshop","socrates","natal","carnaval","ornitorrinco","carlos-ruas",
-              "dinossauros","meio-ambiente","","","","","","","","","",""))
+              "dinossauros","meio-ambiente","","","","","","","","","","")
 
 
 lista=function(i=1){
   if(i=="todas")
   {listas}
-  else{listas[i,]}
+  else{listas[i]}
   }
 
 #-----#
