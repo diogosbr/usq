@@ -12,7 +12,7 @@ listas= data.frame(numero=1:40,temas=rbind("luciraldo","caim","deus-metal","frut
 lista=function(i=1){
   if(i=="todas")
   {listas}
-  else{listas[i]}
+  else{listas[i,]}
   }
 
 #-----#
